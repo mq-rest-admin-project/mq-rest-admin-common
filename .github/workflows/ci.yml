@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Validate standards
-        uses: wphillipmoore/standard-actions/actions/standards-compliance@develop
+        uses: wphillipmoore/standard-actions/actions/standards-compliance@v1.3
 
   shellcheck:
     name: "ci: shellcheck"
