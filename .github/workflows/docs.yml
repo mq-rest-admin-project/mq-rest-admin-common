@@ -29,6 +29,6 @@ jobs:
         run: python3 scripts/dev/generate_mapping_docs.py
 
       - name: Deploy docs
-        uses: wphillipmoore/standard-actions/actions/docs-deploy@develop
+        uses: wphillipmoore/standard-actions/actions/docs-deploy@v1.3
         with:
           version-command: cat VERSION | cut -d. -f1,2
