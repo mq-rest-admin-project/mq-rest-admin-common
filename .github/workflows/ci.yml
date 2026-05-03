@@ -5,22 +5,21 @@ on:
 
 permissions:
   contents: read
+  security-events: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  standards-compliance:
-    name: "ci: standards-compliance"
-    runs-on: ubuntu-latest
-    container: ghcr.io/wphillipmoore/dev-base:latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Validate standards
-        uses: wphillipmoore/standard-actions/actions/standards-compliance@v1.4
+  security-and-standards:
+    uses: wphillipmoore/standard-actions/.github/workflows/ci-security.yml@v1.4
+    permissions:
+      contents: read
+      security-events: write
+    with:
+      language: shell
+      run-codeql: 'false'
 
   shellcheck:
     name: "ci: shellcheck"
