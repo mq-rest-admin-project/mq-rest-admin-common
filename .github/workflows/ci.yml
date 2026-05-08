@@ -1,38 +1,44 @@
-name: CI - Test and Validate
+name: CI
 
 on:
   pull_request:
+  workflow_call:
+    inputs:
+      run-security:
+        type: boolean
+        default: true
+      run-release:
+        type: boolean
+        default: true
 
 permissions:
   contents: read
-  security-events: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  security-and-standards:
-    uses: wphillipmoore/standard-actions/.github/workflows/ci-security.yml@v1.4
+  quality:
+    uses: wphillipmoore/standard-actions/.github/workflows/ci-quality.yml@v1.5
+    with:
+      language: shell
+      versions: '["latest"]'
+      container-suffix: base
+
+  security:
+    uses: wphillipmoore/standard-actions/.github/workflows/ci-security.yml@v1.5
+    with:
+      language: shell
+      run-codeql: false
+      run-standards: ${{ inputs.run-release || true }}
+      run-security: ${{ inputs.run-security || true }}
     permissions:
       contents: read
       security-events: write
+
+  release:
+    uses: wphillipmoore/standard-actions/.github/workflows/ci-release.yml@v1.5
     with:
       language: shell
-      run-codeql: 'false'
-
-  shellcheck:
-    name: "ci: shellcheck"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Run shellcheck
-        run: |
-          files=$(find scripts -type f \( -name '*.sh' -o -path '*/git-hooks/*' \) | sort)
-          if [ -n "$files" ]; then
-            echo "$files" | xargs shellcheck
-          else
-            echo "No shell scripts found."
-          fi
+      run-release: ${{ inputs.run-release != false }}
