@@ -11,7 +11,8 @@ permissions:
 
 jobs:
   publish:
-    uses: wphillipmoore/standard-actions/.github/workflows/publish-release.yml@v1.4
+    # yamllint disable-line rule:line-length
+    uses: wphillipmoore/standard-actions/.github/workflows/publish-release.yml@v1.5
     permissions:
       contents: write
       pull-requests: write

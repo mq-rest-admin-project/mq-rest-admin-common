@@ -109,13 +109,13 @@ This is a documentation-only repository. There are no build or test commands.
 git config core.hooksPath ../standard-tooling/scripts/lib/git-hooks  # Enable git hooks
 ```
 
-Standard-tooling CLI tools (`st-commit`, `st-validate-local`, etc.) are
+Standard-tooling CLI tools (`st-commit`, `st-validate`, etc.) are
 pre-installed in the dev container images. No local setup required.
 
 ### Validation
 
 ```bash
-markdownlint .            # Lint all Markdown files
+st-docker-run -- st-validate   # Full validation (runs in dev container)
 ```
 
 ## Architecture
