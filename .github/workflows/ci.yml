@@ -1,3 +1,4 @@
+# https://github.com/wphillipmoore/standard-actions/blob/develop/.github/workflows/README.md
 name: CI
 
 on:
@@ -37,8 +38,8 @@ jobs:
       contents: read
       security-events: write
 
-  release:
-    uses: wphillipmoore/standard-actions/.github/workflows/ci-release.yml@v1.5
+  version:
+    uses: wphillipmoore/standard-actions/.github/workflows/ci-version-bump.yml@v1.5
     with:
       language: shell
-      run-release: ${{ inputs.run-release != false }}
+      run-release: ${{ inputs.run-release != 'false' }}
