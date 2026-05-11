@@ -2,226 +2,226 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/ai-engineering/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/changelog/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/languages/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/design/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/design/nested-object-flattening/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/design/rationale/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/design/runcommand-endpoint/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/development/local-mq-container/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/development/quality-gates/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/development/testing-platforms/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/apstatus/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/archive/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/authinfo/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/authrec/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/authserv/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/cfstatus/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/cfstruct/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/channel/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/chinit/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/chlauth/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/chstatus/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/clusqmgr/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/cluster/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/comminfo/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/conn/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/entauth/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/group/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/indoubt/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/listener/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/log/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/lsstatus/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/namelist/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/policy/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/process/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/pubsub/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/qmgr/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/qmstatus/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/qstatus/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/queue/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/sbstatus/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/security/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/service/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/smds/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/smdsconn/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/stgclass/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/sub/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/svstatus/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/topic/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/topicstr/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/tpstatus/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/mappings/usage/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/releases/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/releases/v1.2.0/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
     <url>
          <loc>https://wphillipmoore.github.io/mq-rest-admin-common/dev/releases/v1.2.1/</loc>
-         <lastmod>2026-05-10</lastmod>
+         <lastmod>2026-05-11</lastmod>
     </url>
 </urlset>
