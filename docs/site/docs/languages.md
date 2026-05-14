@@ -11,7 +11,7 @@ for its language.
 **Repository**: [mq-rest-admin-java](https://github.com/mq-rest-admin-project/mq-rest-admin-java)
 | **Documentation**: [mq-rest-admin-project.github.io/mq-rest-admin-java](https://mq-rest-admin-project.github.io/mq-rest-admin-java/1.1/)
 
-- Maven coordinates: `io.github.wphillipmoore:mq-rest-admin`
+- Maven coordinates: `io.github.mq-rest-admin-project:mq-rest-admin`
 - Zero runtime dependencies beyond Gson
 - `java.net.http.HttpClient` transport
 - camelCase method names (`displayQueue()`, `defineQlocal()`)
