@@ -15,9 +15,9 @@ Shared documentation fragments for the mq-rest-admin project family.
 This repository contains language-neutral documentation fragments that are
 composed into per-language documentation sites for:
 
-- [mq-rest-admin-java](https://github.com/wphillipmoore/mq-rest-admin-java) — Java (MkDocs + Material)
-- [mq-rest-admin-python](https://github.com/wphillipmoore/mq-rest-admin-python) — Python (Sphinx + MyST)
-- [mq-rest-admin-go](https://github.com/wphillipmoore/mq-rest-admin-go) — Go (future)
+- [mq-rest-admin-java](https://github.com/mq-rest-admin-project/mq-rest-admin-java) — Java (MkDocs + Material)
+- [mq-rest-admin-python](https://github.com/mq-rest-admin-project/mq-rest-admin-python) — Python (Sphinx + MyST)
+- [mq-rest-admin-go](https://github.com/mq-rest-admin-project/mq-rest-admin-go) — Go (future)
 
 ## Fragment structure
 

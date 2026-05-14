@@ -1,4 +1,4 @@
-# https://github.com/wphillipmoore/standard-actions/blob/develop/.github/workflows/README.md
+# https://github.com/vergil-project/vergil-actions/blob/develop/.github/workflows/README.md
 name: CD
 
 on:
@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   docs:
-    uses: wphillipmoore/standard-actions/.github/workflows/cd-docs.yml@v1.5
+    uses: vergil-project/vergil-actions/.github/workflows/cd-docs.yml@v2.0
     with:
       pre-deploy-command: python3 scripts/dev/generate_mapping_docs.py
     permissions:
@@ -22,5 +22,7 @@ jobs:
 
   release:
     if: github.ref == 'refs/heads/main'
-    uses: wphillipmoore/standard-actions/.github/workflows/cd-release.yml@v1.5
-    secrets: inherit
+    uses: vergil-project/vergil-actions/.github/workflows/cd-release.yml@v2.0
+    secrets:
+      APP_CLIENT_ID: ${{ secrets.APP_CLIENT_ID }}
+      APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}

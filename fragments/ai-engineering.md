@@ -150,8 +150,7 @@ Commits that involved AI assistance include a `Co-Authored-By` trailer
 identifying the agent used:
 
 ```text
-Co-Authored-By: wphillipmoore-claude <255925739+wphillipmoore-claude@users.noreply.github.com>
-Co-Authored-By: wphillipmoore-codex <255923655+wphillipmoore-codex@users.noreply.github.com>
+Co-Authored-By: wphillipmoore-agent <284101533+wphillipmoore-agent@users.noreply.github.com>
 ```
 
 This provides a transparent, auditable record of AI involvement in the

@@ -27,8 +27,8 @@ mq-rest-admin project family.
 
 ## Language implementations
 
-- [mq-rest-admin-java](https://wphillipmoore.github.io/mq-rest-admin-java/1.1/) — Java
-- [mq-rest-admin-python](https://wphillipmoore.github.io/mq-rest-admin-python/1.1/) — Python
-- [mq-rest-admin-go](https://wphillipmoore.github.io/mq-rest-admin-go/1.1/) — Go
-- [mq-rest-admin-ruby](https://github.com/wphillipmoore/mq-rest-admin-ruby) — Ruby (Work in Progress)
-- [mq-rest-admin-rust](https://github.com/wphillipmoore/mq-rest-admin-rust) — Rust (Work in Progress)
+- [mq-rest-admin-java](https://mq-rest-admin-project.github.io/mq-rest-admin-java/1.1/) — Java
+- [mq-rest-admin-python](https://mq-rest-admin-project.github.io/mq-rest-admin-python/1.1/) — Python
+- [mq-rest-admin-go](https://mq-rest-admin-project.github.io/mq-rest-admin-go/1.1/) — Go
+- [mq-rest-admin-ruby](https://github.com/mq-rest-admin-project/mq-rest-admin-ruby) — Ruby (Work in Progress)
+- [mq-rest-admin-rust](https://github.com/mq-rest-admin-project/mq-rest-admin-rust) — Rust (Work in Progress)
