@@ -271,6 +271,40 @@ sed -i '' \
   .github/workflows/ci.yml .github/workflows/cd.yml
 ```
 
+**T5a. Replace `secrets: inherit` with explicit secrets in CD workflow**
+
+`secrets: inherit` does not work cross-org. Replace it with explicit
+secret passing in `.github/workflows/cd.yml`:
+
+```yaml
+# Before:
+    secrets: inherit
+
+# After:
+    secrets:
+      APP_CLIENT_ID: ${{ secrets.APP_CLIENT_ID }}
+      APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+```
+
+**T5b. Configure repository secrets**
+
+Each repo needs `APP_CLIENT_ID` and `APP_PRIVATE_KEY` as repository
+secrets (the App client ID was recorded during governance setup
+Task 2 Step 3; the private key is in Keychain):
+
+```bash
+APP_CLIENT_ID="<client-id-from-governance-setup>"
+APP_PRIVATE_KEY=$(security find-generic-password -s "mq-rest-admin/app-private-key" -w)
+
+gh secret set APP_CLIENT_ID --repo mq-rest-admin-project/<repo> --body "$APP_CLIENT_ID"
+gh secret set APP_PRIVATE_KEY --repo mq-rest-admin-project/<repo> --body "$APP_PRIVATE_KEY"
+```
+
+Verify:
+```bash
+gh secret list --repo mq-rest-admin-project/<repo>
+```
+
 **T6. Update issue templates**
 
 ```bash
@@ -318,7 +352,7 @@ additional files.
 **T9. Final reference sweep**
 
 ```bash
-grep -rn "wphillipmoore\|standard-tooling\|standard-actions\|st-commit\|st-validate\|st-docker\|ST_COMMIT\|standard-tooling:" \
+grep -rn "wphillipmoore\|standard-tooling\|standard-actions\|st-commit\|st-validate\|st-docker\|ST_COMMIT\|standard-tooling:\|secrets:.*inherit" \
   --include="*.py" --include="*.md" --include="*.toml" \
   --include="*.yml" --include="*.yaml" --include="*.json" \
   --include="*.sh" --include="*.go" --include="*.rs" \
@@ -601,7 +635,47 @@ language-specific metadata.
 
 ---
 
-## Task 11: Cross-Repo Reference Sweep
+## Task 11: Verify Module Identity for Go and Java
+
+After per-repo migrations are complete, verify that the module
+identity changes for Go and Java are clean before the first release.
+
+- [ ] **Step 1: Check Go module proxy for old path**
+
+  ```bash
+  curl -s "https://proxy.golang.org/github.com/wphillipmoore/mq-rest-admin-go/@v/list"
+  ```
+
+  If any versions are listed, confirm retraction was handled in
+  Task 7. If empty, no action needed.
+
+- [ ] **Step 2: Check Maven Central for old Java coordinates**
+
+  Verify whether any versions of the Java library have been published
+  under the old `groupId`. If so, confirm deprecation was handled in
+  Task 6.
+
+- [ ] **Step 3: Verify new Go module resolves**
+
+  ```bash
+  GONOSUMCHECK=* go list -m github.com/mq-rest-admin-project/mq-rest-admin-go@latest 2>&1
+  ```
+
+  This will fail until the first version is published under the new
+  path — that's expected. The purpose is to confirm the module path
+  is syntactically valid and the proxy is reachable.
+
+- [ ] **Step 4: Document in release notes template**
+
+  For both Go and Java, ensure the first post-migration release notes
+  include:
+  - The module/artifact identity change
+  - Retraction/deprecation of old identities (if any were published)
+  - Instructions for consumers to update import paths
+
+---
+
+## Task 12: Cross-Repo Reference Sweep
 
 - [ ] **Step 1: Search for stale references across wphillipmoore repos**
 
@@ -637,7 +711,7 @@ language-specific metadata.
 
 ---
 
-## Task 12: Local Cleanup
+## Task 13: Local Cleanup
 
 - [ ] **Step 1: Verify all local remotes point to new org**
 

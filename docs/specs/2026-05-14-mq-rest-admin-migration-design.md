@@ -54,6 +54,7 @@ tooling reference updates.
 | Tooling dependency | `standard-tooling = "v1.4"` | `vergil = "v2.0"` |
 | Co-authors | `claude`, `codex` (per-harness) | `agent` (single entry) |
 | CI workflows | `wphillipmoore/standard-actions@v1.5` | `vergil-project/vergil-actions@v2.0` |
+| CD secrets | `secrets: inherit` | Explicit `secrets:` block (`APP_CLIENT_ID`, `APP_PRIVATE_KEY`) — `secrets: inherit` does not work cross-org |
 | Issue templates | `wphillipmoore/standard-tooling` source comments | `vergil-project/vergil-tooling` |
 | CLAUDE.md | `wphillipmoore`, `standard-tooling`, `st-*` | `vergil-project`, `vergil-tooling`, `vrg-*` |
 | Standards reference | `wphillipmoore/standards-and-conventions` | `vergil-project/vergil-tooling` (active docs) |
@@ -145,9 +146,11 @@ If transfers partially complete (some repos moved, some not):
 Each repo follows the same task sequence. This is the canonical
 template — repo-specific additions are documented in Section 3.
 
-The migration for each repo should be executed as a tight sequence
-immediately after transfer — do not leave a gap where CI could trigger
-against stale workflow references.
+**Note:** In a multi-developer environment, each repo's migration
+should be executed as a tight sequence immediately after transfer to
+prevent CI from triggering against stale workflow references. In a
+single-developer environment where repos are frozen during migration,
+the transfer and per-repo migration phases can be batched separately.
 
 1. **Pre-flight checks** — clean state, on develop, up to date
 2. **Create feature branch** — `feature/<issue-number>-org-migration`
@@ -156,16 +159,20 @@ against stale workflow references.
    co-author consolidated to single `agent` entry
 5. **Update CI/CD workflows** — all `uses:` references from
    `wphillipmoore/standard-actions@v1.5` to
-   `vergil-project/vergil-actions@v2.0`; also update any references
+   `vergil-project/vergil-actions@v2.0`; update any references
    to `wphillipmoore/mq-rest-admin-dev-environment/` to
-   `mq-rest-admin-project/mq-rest-admin-dev-environment/`
+   `mq-rest-admin-project/mq-rest-admin-dev-environment/`; replace
+   `secrets: inherit` in CD workflows with explicit `secrets:` block
+   passing `APP_CLIENT_ID` and `APP_PRIVATE_KEY` (required for
+   cross-org reusable workflow calls)
 6. **Update issue templates** — source comment references from
    `wphillipmoore/standard-tooling` to `vergil-project/vergil-tooling`
 7. **Update CLAUDE.md** — see CLAUDE.md substitution table below
 8. **Update repo-specific files** — per Section 3 delta
 9. **Final reference sweep** — grep for any remaining `wphillipmoore`,
    `standard-tooling`, `standard-actions`, `st-commit`, `st-validate`,
-   `st-docker`, `ST_COMMIT`, `standard-tooling:` references
+   `st-docker`, `ST_COMMIT`, `standard-tooling:`, `secrets: inherit`
+   references
 10. **Validate** — repo-specific validation command if available
 11. **Push and open PR** — targeting `develop`
 
@@ -332,7 +339,7 @@ complete:
 | Risk | Mitigation |
 |---|---|
 | Transfer fails mid-sequence (partial state) | Sequential transfer with verification; stop on failure, push forward or roll back (Section 1) |
-| CI triggers between transfer and workflow update | Tight sequence per repo — push migration branch immediately after transfer to eliminate the window |
+| CI triggers between transfer and workflow update | Repos are frozen during migration (single-developer project); in a multi-developer environment, use a tight transfer-then-update sequence per repo |
 | Go module path change breaks external consumers | No known external consumers; retract old versions if published; document in release notes (Section 3.1) |
 | Java Maven coordinates change | No known external consumers; deprecate old versions if published (Section 3.1) |
 | Language repos reference dev-environment action at old path | Dev-environment transfers first (dependency order); each repo's workflow sweep updates the reference |

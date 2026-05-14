@@ -499,25 +499,10 @@ complete and all 8 repos are at `mq-rest-admin-project/*`.
 **Files:** None (`gh` CLI)
 
 Create issues in `mq-rest-admin-project/mq-rest-admin-common` for
-deferred governance work.
+deferred governance work. Issues for `.github` profile repo and
+cross-human review CI check already exist — do not duplicate.
 
-- [ ] **Step 1: Create issue for `.github` profile repo**
-
-  ```bash
-  gh issue create --repo mq-rest-admin-project/mq-rest-admin-common \
-    --title "feat: set up mq-rest-admin-project/.github profile repo" \
-    --body "Create the mq-rest-admin-project/.github repository for org-level configuration (org README, default community health files, CONTRIBUTING.md, issue/PR templates). Mirrors the same setup planned for vergil-project and diogenes-project."
-  ```
-
-- [ ] **Step 2: Create issue for Claude Code permission model**
-
-  ```bash
-  gh issue create --repo mq-rest-admin-project/mq-rest-admin-common \
-    --title "feat: design Claude Code permission model for mq-rest-admin-project" \
-    --body "Define the minimal set of allowed operations for AI agent sessions, moving away from permissive mode. Coordinate with the same effort in vergil-project and diogenes-project for consistency."
-  ```
-
-- [ ] **Step 3: Create issue for credential audit tooling**
+- [ ] **Step 1: Create issue for credential audit tooling**
 
   ```bash
   gh issue create --repo mq-rest-admin-project/mq-rest-admin-common \
@@ -525,7 +510,7 @@ deferred governance work.
     --body "Extend VERGIL's vrg-credential-audit (once built) to cover the mq-rest-admin/ credential namespace in macOS Keychain. Track alongside the same effort in vergil-project and diogenes-project."
   ```
 
-- [ ] **Step 4: Create issue for merge queue**
+- [ ] **Step 2: Create issue for merge queue**
 
   ```bash
   gh issue create --repo mq-rest-admin-project/mq-rest-admin-common \
@@ -533,7 +518,7 @@ deferred governance work.
     --body "Enable GitHub merge queue for the mq-rest-admin-project org when the org moves to a paid GitHub plan. Coordinate with the same effort in vergil-project and diogenes-project."
   ```
 
-- [ ] **Step 5: Verify issues are created**
+- [ ] **Step 3: Verify issues are created**
 
   ```bash
   gh issue list --repo mq-rest-admin-project/mq-rest-admin-common \

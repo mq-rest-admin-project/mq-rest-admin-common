@@ -67,8 +67,12 @@ in all repos:
 - No deletion of protected branches
 - No non-fast-forward pushes
 
-The `main` branch additionally restricts merge to org owners only
-(release gate).
+The `main` branch uses the same ruleset as `develop`. The release
+gate is credential-based: the release tooling authenticates as the
+GitHub App (`mq-rest-admin-release[bot]`) using the App private key
+stored in the human's Keychain, so the human controls when releases
+happen by controlling the credentials, not by restricting who can
+merge.
 
 ## Section 3: Credential Management
 
@@ -83,11 +87,19 @@ Credentials follow the same pattern as VERGIL and Diogenes but use the
 | Agent PAT | `mq-rest-admin/agent-pat` | Development, AI agent sessions |
 | App private key | `mq-rest-admin/app-private-key` | Release tool (PR creation) |
 
-### Non-Secret Configuration
+### Repository Secrets for CD Workflows
 
-The GitHub App client ID is not a secret. It is recorded directly in
-the CI/CD workflow files as an argument to the reusable release
-workflow. It does not belong in the credential store.
+The CD workflows call reusable release workflows in `vergil-project`.
+Because `secrets: inherit` does not work cross-org, each repo must
+have explicit repository secrets configured:
+
+| Secret | Value | Source |
+|---|---|---|
+| `APP_CLIENT_ID` | GitHub App client ID | App settings page (not a secret, but GitHub Actions requires it in the secrets store for cross-org calls) |
+| `APP_PRIVATE_KEY` | GitHub App private key (PEM) | Keychain `mq-rest-admin/app-private-key` |
+
+These secrets are configured per-repo (not org-level) during the
+per-repo migration phase.
 
 ### Human PAT Scope
 
