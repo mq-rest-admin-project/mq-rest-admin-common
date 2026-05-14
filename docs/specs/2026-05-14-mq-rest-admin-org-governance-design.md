@@ -127,7 +127,35 @@ Identical to VERGIL:
 - Do not allow forking of private repos
 - Agent accounts are outside collaborators, never org members
 
-## Section 5: What VERGIL Already Handled
+## Section 5: Governance Phasing
+
+Governance setup is split into two phases around the repo transfer:
+
+### Phase 1: Pre-Transfer (before any repos move)
+
+- Create the `mq-rest-admin-project` org
+- Configure org security settings (Section 4)
+- Register the `mq-rest-admin-release` GitHub App (Section 3)
+- Verify org exists and settings are correct
+
+### Phase 2: Post-Transfer (after all repos are in the org)
+
+- Create Human PAT and Agent PAT scoped to `mq-rest-admin-project`
+  (fine-grained PATs require repos to exist under the resource owner)
+- Store credentials in Keychain under `mq-rest-admin/` namespace
+- Install the GitHub App org-wide
+- Invite `wphillipmoore-agent` as outside collaborator
+- Configure org-level branch protection rulesets (Section 2)
+- Verify the full governance model end-to-end
+
+**Why the split:** Fine-grained PATs scoped to `mq-rest-admin-project`
+can only access repos owned by that org. Creating them before the
+transfer means they have no repos to operate on. Rulesets similarly
+need repos to protect. The App registration can happen pre-transfer
+(it's an org-level resource), but installation verification requires
+repos to be present.
+
+## Section 6: What VERGIL Already Handled
 
 The following items from the VERGIL governance plan are prerequisites
 that are already complete by the time this plan executes:
@@ -141,7 +169,7 @@ Consumer-repo co-author config updates (changing `claude`/`codex`
 entries to `agent` in each repo's config) happen during the migration,
 not during governance setup.
 
-## Section 6: Deferred Work
+## Section 7: Deferred Work
 
 These items apply to `mq-rest-admin-project` but are deferred to
 future work. Each item is tracked as a GitHub issue in the org,
@@ -165,3 +193,7 @@ Additionally, with 7 repos in the org (compared to 1 for Diogenes),
 the rulesets and governance settings apply uniformly across all repos.
 This is the desired behavior but means any org-level misconfiguration
 affects all 7 repos simultaneously.
+
+With 8 repos (including the archived `mq-rest-admin-template`), the
+credential and governance surface is slightly larger than initially
+scoped for 7.

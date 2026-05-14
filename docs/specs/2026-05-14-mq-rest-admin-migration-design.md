@@ -16,14 +16,17 @@ are combined into a single migration pass per repo.
 1. **VERGIL rename complete.** All references target post-VERGIL names:
    `vergil-project/vergil-actions`, `vergil.toml`, `vrg-commit`, etc.
 
-2. **`mq-rest-admin-project` org governance complete.** The org exists
-   with security settings, credentials, and GitHub App configured per
-   `docs/specs/2026-05-14-mq-rest-admin-org-governance-design.md`.
+2. **`mq-rest-admin-project` org governance Phase 1 complete.** The org
+   exists with security settings configured and GitHub App registered
+   per governance spec Section 5. Phase 2 (credentials, rulesets,
+   agent invitation) runs after the batch transfer.
 
 ## Scope
 
-This is a multi-repo migration — 7 repositories transferred to the
-same org in a single batch, then updated repo-by-repo. Unlike the
+This is a multi-repo migration — 8 repositories transferred to the
+same org in sequence, then 7 active repos updated repo-by-repo (the
+archived `mq-rest-admin-template` is transferred but not migrated).
+Unlike the
 Diogenes migration (single repo with plugin namespace and directory
 restructuring), these repos have no plugin changes, no renames, and no
 directory restructuring. The changes are limited to org transfer and
@@ -40,12 +43,7 @@ tooling reference updates.
 | `mq-rest-admin-ruby` | Ruby | Language implementation |
 | `mq-rest-admin-rust` | Rust | Language implementation |
 | `mq-rest-admin-dev-environment` | Shell | Docker Compose, reusable GH Action |
-
-### Excluded
-
-| Repository | Reason |
-|---|---|
-| `mq-rest-admin-template` | Archived, no longer active |
+| `mq-rest-admin-template` | None | Archived — transfer only, no per-repo migration |
 
 ### What changes (all repos, uniform)
 
@@ -66,7 +64,7 @@ tooling reference updates.
 |---|---|
 | **common** | None beyond the uniform set |
 | **python** | `pyproject.toml` URLs (Homepage, Repository, Issues) |
-| **java** | Build config URLs (pom.xml or Gradle SCM/URL sections) |
+| **java** | `pom.xml` URLs (SCM, project URL, issue management) |
 | **go** | `go.mod` module path if it references the GitHub org |
 | **ruby** | Gemspec URLs (homepage, source_code_uri, metadata) |
 | **rust** | `Cargo.toml` URLs (repository, homepage) |
@@ -81,26 +79,75 @@ tooling reference updates.
 - Directory structure (no plugin restructuring)
 - Local sibling path references (`../mq-rest-admin-python`, etc.)
 
-## Section 1: Batch Transfer
+## Section 1: Transfer Sequence
 
-All 7 repos are transferred to `mq-rest-admin-project` in a single
-batch via the GitHub API. GitHub creates automatic redirects from the
-old URLs, so CI and cross-references continue working during the
-migration window.
+Repos are transferred one at a time via the GitHub API
+(`POST /repos/{owner}/{repo}/transfer`). There is no atomic batch
+transfer — each call operates independently.
 
-**Pre-flight checks:**
-- No open PRs on any of the 7 repos
-- Clean working state on `develop` for all repos
+### Transfer order
+
+Transfer repos in dependency order so that CI-referenced repos move
+first:
+
+1. `mq-rest-admin-dev-environment` (referenced by language repo CI)
+2. `mq-rest-admin-common` (referenced by language repos for data/docs)
+3. `mq-rest-admin-python`
+4. `mq-rest-admin-java`
+5. `mq-rest-admin-go`
+6. `mq-rest-admin-ruby`
+7. `mq-rest-admin-rust`
+8. `mq-rest-admin-template` (archived — transfer only, no further work)
+
+### Pre-flight checks
+
+- No open PRs on any of the 8 repos
+- Clean working state on `develop` for all active repos
 - All CI passing
+- Governance Phase 1 complete (org exists, security settings
+  configured, GitHub App registered — see governance spec Section 5)
 
-**Post-transfer:**
-- Update local git remotes for all 7 repos
-- Verify all transfers succeeded via GitHub API
+### Transfer procedure
+
+For each repo in order:
+
+1. Transfer via GitHub API
+2. Verify the transfer succeeded:
+   `gh api repos/mq-rest-admin-project/{repo} --jq .full_name`
+3. Update local git remote:
+   `git remote set-url origin git@github.com:mq-rest-admin-project/{repo}.git`
+4. Proceed to the next repo
+
+If a transfer fails, stop. Do not continue transferring remaining
+repos. Diagnose the failure, resolve it, then resume from the failed
+repo.
+
+### Partial failure recovery
+
+If transfers partially complete (some repos moved, some not):
+
+- **Push forward** (preferred): Fix the failure cause and resume
+  transfers from where they stopped. GitHub redirects cover
+  cross-references from already-transferred repos to
+  not-yet-transferred repos.
+- **Roll back**: Transfer already-moved repos back to `wphillipmoore`
+  via the same API. Reset local remotes. This is safe because no
+  per-repo migration branches have been pushed yet at this stage.
+
+### Post-transfer
+
+- Verify all 8 transfers succeeded via GitHub API
+- Run governance Phase 2 (credentials, rulesets, agent invitation —
+  see governance spec Section 5)
 
 ## Section 2: Per-Repo Migration Template
 
 Each repo follows the same task sequence. This is the canonical
 template — repo-specific additions are documented in Section 3.
+
+The migration for each repo should be executed as a tight sequence
+immediately after transfer — do not leave a gap where CI could trigger
+against stale workflow references.
 
 1. **Pre-flight checks** — clean state, on develop, up to date
 2. **Create feature branch** — `feature/<issue-number>-org-migration`
@@ -114,14 +161,32 @@ template — repo-specific additions are documented in Section 3.
    `mq-rest-admin-project/mq-rest-admin-dev-environment/`
 6. **Update issue templates** — source comment references from
    `wphillipmoore/standard-tooling` to `vergil-project/vergil-tooling`
-7. **Update CLAUDE.md** — org references, tooling references, command
-   references (`st-*` to `vrg-*`), standards URL, skills references
+7. **Update CLAUDE.md** — see CLAUDE.md substitution table below
 8. **Update repo-specific files** — per Section 3 delta
 9. **Final reference sweep** — grep for any remaining `wphillipmoore`,
    `standard-tooling`, `standard-actions`, `st-commit`, `st-validate`,
-   `st-docker`, `ST_COMMIT` references
+   `st-docker`, `ST_COMMIT`, `standard-tooling:` references
 10. **Validate** — repo-specific validation command if available
 11. **Push and open PR** — targeting `develop`
+
+### CLAUDE.md substitution table
+
+Step 7 requires the following concrete substitutions:
+
+| Before | After | Location in CLAUDE.md |
+|---|---|---|
+| `https://github.com/wphillipmoore/standards-and-conventions` | `https://github.com/vergil-project/vergil-tooling` | Standards reference header |
+| `standard-tooling.toml` | `vergil.toml` | Repository profile reference |
+| `/standard-tooling:memory-init` | `/vergil:memory-init` | Memory management skills |
+| `/standard-tooling:memory-audit` | `/vergil:memory-audit` | Memory management skills |
+| `standard-tooling/docs/specs/worktree-convention.md` | `vergil-tooling/docs/specs/worktree-convention.md` | Worktree convention link |
+| `https://github.com/wphillipmoore/standard-tooling/blob/develop/` | `https://github.com/vergil-project/vergil-tooling/blob/develop/` | Worktree convention URL |
+| `The canonical text lives in \`standard-tooling\`` | `The canonical text lives in \`vergil-tooling\`` | Worktree section prose |
+| `../standard-tooling/scripts/lib/git-hooks` | `../vergil-tooling/scripts/lib/git-hooks` | Git hooks path |
+| `Standard-tooling CLI tools (\`st-commit\`, \`st-validate\`, etc.)` | `VERGIL CLI tools (\`vrg-commit\`, \`vrg-validate\`, etc.)` | Environment setup |
+| `st-docker-run -- st-validate` | `vrg-docker-run -- vrg-validate` | Validation command |
+| `https://github.com/wphillipmoore/mq-rest-admin-dev-environment` | `https://github.com/mq-rest-admin-project/mq-rest-admin-dev-environment` | Dev environment clone URL |
+| `wphillipmoore/standards-and-conventions` | `vergil-project/vergil-tooling` | Canonical standards reference |
 
 ### Commit strategy
 
@@ -152,10 +217,10 @@ repo with no language-specific metadata.
 ### mq-rest-admin-java
 
 **Additional files:**
-- Build configuration (Maven `pom.xml` or Gradle): Update SCM URLs,
-  project URL, issue management URL to
-  `https://github.com/mq-rest-admin-project/mq-rest-admin-java`
+- `pom.xml` (Maven): Update SCM URLs, project URL, issue management
+  URL to `https://github.com/mq-rest-admin-project/mq-rest-admin-java`
 - Grep `src/` for any `wphillipmoore` references in Java source
+- See Section 3.1 for Maven coordinate and publication implications
 
 ### mq-rest-admin-go
 
@@ -164,6 +229,7 @@ repo with no language-specific metadata.
   `github.com/wphillipmoore/mq-rest-admin-go`, update to
   `github.com/mq-rest-admin-project/mq-rest-admin-go`
 - Grep `*.go` files for any `wphillipmoore` import paths or references
+- See Section 3.1 for Go module path and publication implications
 
 **Note:** A Go module path change is technically a breaking change for
 external consumers. There are no known external consumers of this
@@ -193,12 +259,67 @@ module.
   — those references are updated as part of each language repo's CI
   workflow sweep (the template step covers this)
 
+### Section 3.1: Module Identity Changes (Go and Java)
+
+Go and Java both expose the GitHub org path in their module/package
+identity, unlike Python (where PyPI is the namespace) or Ruby/Rust
+(where the gem/crate name is independent of the source location).
+The org transfer changes how the community discovers and imports
+these libraries.
+
+There are no known external consumers of either module today. This
+makes the migration low-risk but the first post-migration publish
+must handle the identity change cleanly.
+
+#### Go
+
+- **Module path change:** `github.com/wphillipmoore/mq-rest-admin-go`
+  becomes `github.com/mq-rest-admin-project/mq-rest-admin-go`
+- **Internal imports:** All `*.go` files with cross-package imports
+  using the old module path must be updated
+- **Go module proxy:** `proxy.golang.org` caches the old module path
+  permanently — it does not follow redirects. The old path will
+  continue to resolve to the last version published under it.
+- **Retraction:** Add a `retract` directive in the old module's
+  `go.mod` (before transfer) for all published versions, directing
+  users to the new path. If no versions have been published to the
+  proxy, this step can be skipped.
+- **Verification:** `go mod tidy` must succeed after all path updates
+
+#### Java (Maven)
+
+- **Maven coordinates:** If the `groupId` or artifact metadata in
+  `pom.xml` references `wphillipmoore`, update to reflect the new org
+- **Maven Central:** If any versions have been published, the old
+  coordinates remain cached in Maven Central permanently
+- **Deprecation:** Mark old published versions as deprecated in the
+  repository metadata. If no versions have been published to a public
+  repository, this step can be skipped.
+
+#### First post-migration publish checklist
+
+For both Go and Java, the first release after migration should:
+
+1. Verify the new module/artifact identity resolves correctly
+2. Confirm old versions are retracted/deprecated (if any were published)
+3. Document the identity change in release notes
+4. Verify downstream resolution — `go get` / Maven dependency
+   resolution pulls the new identity correctly
+
 ## Section 4: Post-Migration
 
-After all 7 repos are migrated:
+After all 8 repos are transferred and per-repo migrations are
+complete:
 
-1. **Org governance activation** — Plan A Phase 2: invite agent
-   account, configure org-level rulesets, verify governance model
+1. **Governance Phase 2 activation** (if not already done after
+   transfer — see governance spec Section 5):
+   - Create Human PAT and Agent PAT scoped to `mq-rest-admin-project`
+   - Store credentials in Keychain under `mq-rest-admin/` namespace
+   - Install the `mq-rest-admin-release` GitHub App org-wide
+   - Invite `wphillipmoore-agent` as outside collaborator
+   - Configure org-level branch protection rulesets
+   - Verify: agent can push branches, human can approve/merge PRs,
+     direct pushes to `develop`/`main` are blocked, CI runs on PRs
 2. **Create deferred work issues** — `.github` profile repo,
    cross-human review CI check, credential audit tooling, merge queue
 3. **Cross-repo reference sweep** — search all repos in `wphillipmoore`
@@ -210,12 +331,14 @@ After all 7 repos are migrated:
 
 | Risk | Mitigation |
 |---|---|
-| CI breaks during migration window | GitHub redirects cover the gap; sweep all repos promptly |
-| Go module path change breaks external consumers | No known external consumers; document in release notes |
-| Language repos reference dev-environment action at old path | Redirects cover it; each repo's workflow sweep updates the reference |
+| Transfer fails mid-sequence (partial state) | Sequential transfer with verification; stop on failure, push forward or roll back (Section 1) |
+| CI triggers between transfer and workflow update | Tight sequence per repo — push migration branch immediately after transfer to eliminate the window |
+| Go module path change breaks external consumers | No known external consumers; retract old versions if published; document in release notes (Section 3.1) |
+| Java Maven coordinates change | No known external consumers; deprecate old versions if published (Section 3.1) |
+| Language repos reference dev-environment action at old path | Dev-environment transfers first (dependency order); each repo's workflow sweep updates the reference |
 | Credential proliferation (3 more Keychain entries) | Manageable at current scale; credential audit tooling in backlog |
-| 7 repos means 7 PRs to review and merge | Template-driven changes are mechanical and parallelizable |
-| Org-level misconfiguration affects all 7 repos | Verify governance settings before any repo migration begins |
+| 8 repos means 7 PRs to review and merge (template excluded) | Template-driven changes are mechanical and parallelizable |
+| Org-level misconfiguration affects all 8 repos | Verify governance settings before any repo migration begins |
 | Stale cross-references in repos outside this project | Post-migration sweep covers this |
 
 ## File Map (per-repo template)
@@ -233,7 +356,7 @@ After all 7 repos are migrated:
 
 ### Modified (repo-specific, where applicable)
 - `pyproject.toml` (Python)
-- `pom.xml` or Gradle config (Java)
+- `pom.xml` (Java)
 - `go.mod` (Go)
 - Gemspec (Ruby)
 - `Cargo.toml` (Rust)
