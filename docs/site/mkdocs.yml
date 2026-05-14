@@ -1,9 +1,9 @@
 site_name: mq-rest-admin-common
-site_url: https://wphillipmoore.github.io/mq-rest-admin-common/
+site_url: https://mq-rest-admin-project.github.io/mq-rest-admin-common/
 site_description: >-
   Shared documentation fragments and canonical mapping data
   for the mq-rest-admin project family
-repo_url: https://github.com/wphillipmoore/mq-rest-admin-common
+repo_url: https://github.com/mq-rest-admin-project/mq-rest-admin-common
 repo_name: mq-rest-admin-common
 edit_uri: ""
 

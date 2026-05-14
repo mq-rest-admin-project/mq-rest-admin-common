@@ -2,9 +2,9 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Standards reference**: <https://github.com/wphillipmoore/standards-and-conventions>
-— active standards documentation lives in the standard-tooling repository under `docs/`.
-Repository profile: `standard-tooling.toml`.
+**Standards reference**: <https://github.com/vergil-project/vergil-tooling>
+— active standards documentation lives in the vergil-tooling repository under `docs/`.
+Repository profile: `vergil.toml`.
 
 ## Memory management
 
@@ -15,9 +15,9 @@ plugin/skill issue) before writing. See that file for the full
 workflow.
 
 Available skills:
-- `/standard-tooling:memory-init` — set up or update the policy header
+- `/vergil:memory-init` — set up or update the policy header
   in a project's `MEMORY.md`.
-- `/standard-tooling:memory-audit` — structured collaborative review
+- `/vergil:memory-audit` — structured collaborative review
   of memory files.
 
 ## Parallel AI agent development
@@ -28,9 +28,9 @@ while preserving shared project memory (which Claude Code derives from the
 session's starting CWD).
 
 **Canonical spec:**
-[`standard-tooling/docs/specs/worktree-convention.md`](https://github.com/wphillipmoore/standard-tooling/blob/develop/docs/specs/worktree-convention.md)
+[`vergil-tooling/docs/specs/worktree-convention.md`](https://github.com/vergil-project/vergil-tooling/blob/develop/docs/specs/worktree-convention.md)
 — full rationale, trust model, failure modes, and memory-path implications.
-The canonical text lives in `standard-tooling`; this section is the local
+The canonical text lives in `vergil-tooling`; this section is the local
 on-ramp.
 
 ### Structure
@@ -97,7 +97,7 @@ This is the shared common repository for the mq-rest-admin project family, servi
 
 **Status**: Active
 
-**Canonical Standards**: This repository follows standards at https://github.com/wphillipmoore/standards-and-conventions (local path: `../standards-and-conventions` if available)
+**Canonical Standards**: This repository follows standards at https://github.com/vergil-project/vergil-tooling (local path: `../vergil-tooling` if available)
 
 ## Development Commands
 
@@ -106,16 +106,16 @@ This is a documentation-only repository. There are no build or test commands.
 ### Environment Setup
 
 ```bash
-git config core.hooksPath ../standard-tooling/scripts/lib/git-hooks  # Enable git hooks
+git config core.hooksPath ../vergil-tooling/scripts/lib/git-hooks  # Enable git hooks
 ```
 
-Standard-tooling CLI tools (`st-commit`, `st-validate`, etc.) are
+VERGIL CLI tools (`vrg-commit`, `vrg-validate`, etc.) are
 pre-installed in the dev container images. No local setup required.
 
 ### Validation
 
 ```bash
-st-docker-run -- st-validate   # Full validation (runs in dev container)
+vrg-docker-run -- vrg-validate   # Full validation (runs in dev container)
 ```
 
 ## Architecture
@@ -162,13 +162,13 @@ attribute mapping definitions. It contains:
 Each language repo (Python, Java, Go, Ruby, Rust) includes thin wrapper
 scripts for managing a local MQ container environment. The actual Docker
 Compose configuration is owned by the
-[mq-rest-admin-dev-environment](https://github.com/wphillipmoore/mq-rest-admin-dev-environment)
+[mq-rest-admin-dev-environment](https://github.com/mq-rest-admin-project/mq-rest-admin-dev-environment)
 repository, which must be cloned as a sibling directory.
 
 ### Prerequisite
 
 ```bash
-git clone https://github.com/wphillipmoore/mq-rest-admin-dev-environment.git ../mq-rest-admin-dev-environment
+git clone https://github.com/mq-rest-admin-project/mq-rest-admin-dev-environment.git ../mq-rest-admin-dev-environment
 ```
 
 ### Lifecycle scripts (in each language repo)
