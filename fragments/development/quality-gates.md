@@ -6,13 +6,11 @@ and CI pipelines enforce the same standards (plus additional checks) on
 every pull request. Pull requests cannot merge until all required jobs
 pass.
 
-## Git hooks
+## Claude Code hook guard
 
-Git hooks are stored in `scripts/git-hooks/` and activated with:
-
-```bash
-git config core.hooksPath scripts/git-hooks
-```
+The `.claude/hooks/guard.sh` PreToolUse hook blocks raw `git` and
+`gh` commands in AI agent sessions — all operations must go through
+the `vrg-git` / `vrg-gh` wrappers.
 
 ### pre-commit
 

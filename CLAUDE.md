@@ -105,9 +105,9 @@ This is a documentation-only repository. There are no build or test commands.
 
 ### Environment Setup
 
-```bash
-git config core.hooksPath ../vergil-tooling/scripts/lib/git-hooks  # Enable git hooks
-```
+The Claude Code PreToolUse hook guard (`.claude/hooks/guard.sh`)
+blocks raw `git` and `gh` commands — use `vrg-git` / `vrg-gh`
+wrappers.
 
 VERGIL CLI tools (`vrg-commit`, `vrg-validate`, etc.) are
 pre-installed in the dev container images. No local setup required.
