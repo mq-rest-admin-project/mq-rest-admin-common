@@ -3,7 +3,6 @@ repository-type = "library"
 versioning-scheme = "library"
 branching-model = "library-release"
 release-model = "artifact-publishing"
-primary-language = "none"
 [ci]
 versions = ["latest"]
 integration-tests = false
