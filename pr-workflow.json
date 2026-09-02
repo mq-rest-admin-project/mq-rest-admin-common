@@ -1,0 +1,20 @@
+{
+  "schema_version": 2,
+  "issue": "227",
+  "branch": "feature/227-ci-sync",
+  "base": "origin/develop",
+  "status": "ready",
+  "created_at": "2026-09-02T18:11:19Z",
+  "updated_at": "2026-09-02T18:11:19Z",
+  "git": {
+    "base_sha": "b3060d1e24ac942551c936d19d725c0a2cfd2a0a",
+    "head_sha": "ce490e667904b4be7f21e3057653a226a6b8be60"
+  },
+  "pr_metadata": {
+    "title": "refactor(ci): drop hardcoded matrix inputs from ci.yml",
+    "summary": "Drop versions and container-tag from every reusable-workflow call in ci.yml so the matrix and container tag resolve from vergil.toml via vergil-actions@v2.1.",
+    "notes": "Fleet completion for epic #338 Task 14 (#876); cross-org, by hand per vergil-tooling#3015. NO secrets.",
+    "linkage": "Ref"
+  },
+  "submitted": null
+}
