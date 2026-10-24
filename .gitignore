@@ -1,15 +1,36 @@
-# macOS
-.DS_Store
-
-# Editors
-.vscode/
-.idea/
+# >>> vergil-managed: base (managed by vrg-gitignore-sync; do not edit) >>>
 *.swp
 *.swo
 *~
+*.bak
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+.env
+.env.*
+*.log
+.venv/
+.worktrees/
+.vergil/
+.superpowers/
+.claude/scheduled_tasks.lock
+.claude/settings.local.json
+build/
+dist/
+coverage.xml
+junit.xml
+licenses.json
+docs/site/site/
+docs/site/docs/changelog.md
+docs/site/docs/releases/
+mkdocs.staged.yml
+node_modules/
+# <<< vergil-managed <<<
+
+# macOS
 
 # Environments
-.env
 .envrc
 
 # Cursor
@@ -17,8 +38,5 @@
 .cursorindexingignore
 
 # Documentation
-docs/site/site/
-.worktrees/
 
 # Vergil tooling scratch dir
-.vergil/
